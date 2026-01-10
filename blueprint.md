@@ -28,38 +28,25 @@ This application is an interactive MBTI test, designed to determine a user's MBT
     *   Uses Formspree (`https://formspree.io/f/mlggrlaq`) for form submission.
     *   Fields include "이름 (Name)", "이메일 (Email)", and "메시지 (Message)".
     *   A button "제휴 문의" has been added to the `result-screen` to open the contact form.
-    *   The form is initially hidden (`display: none;`) and is toggled visible/hidden using JavaScript.
+    *   The form is now visible by default on page load. The `start-screen` is initially hidden.
     *   Includes a "닫기 (Close)" button (`close-form-btn`) to hide the form and return to the `start-screen`.
 *   **Styling:**
     *   Form elements are styled to align with the existing theme, using CSS variables for colors and fonts.
     *   Responsive design principles applied to the form.
 *   **Accessibility:** Basic accessibility considerations for form elements (labels, required attributes).
 
-## Plan for Current Request: Integrate Formspree Contact Form
+## Plan for Current Request: Make Form Visible
 
 ### Objective
-To add a functional and visually integrated contact form for partnership inquiries using Formspree.
+To modify the application so that the Formspree contact form is visible by default when the page loads, instead of the MBTI test start screen.
 
 ### Steps Implemented
-1.  **Insert Form into `index.html`:**
-    *   A new `div` with `id="contact-form-screen"` and class `screen` was added below the main `div.container`.
-    *   This `div` contains an `<h2>` for "제휴 문의" and a `<form>` element.
-    *   The `<form>`'s `action` attribute is set to the provided Formspree endpoint (`https://formspree.io/f/mlggrlaq`).
-    *   Form fields include:
-        *   `label` and `input type="text"` for Name (`name="name"`).
-        *   `label` and `input type="email"` for Email (`name="_replyto"`).
-        *   `label` and `textarea` for Message (`name="message"`).
-    *   All input fields are marked `required`.
-    *   A `button type="submit"` is included for form submission.
-    *   A `button id="close-form-btn"` is added to close the form.
-    *   The `contact-form-screen` is initially hidden with `style="display: none;"`.
-    *   A new button, `contact-form-btn`, was added to the `result-screen` in `index.html` to serve as the entry point for the contact form.
-2.  **Add Styles to `style.css`:**
-    *   New CSS rules were added for `#contact-form-screen` to make it visually similar to the main `.container`.
-    *   Styles for `.form-group`, `label`, `input[type="text"]`, `input[type="email"]`, and `textarea` were added to ensure consistent styling and responsiveness.
-    *   Styles for the submit button and the close button were also added, leveraging existing theme variables where appropriate.
-3.  **Add JavaScript Logic to `main.js`:**
-    *   References to `contactFormScreen`, `contactFormBtn`, and `closeFormBtn` were added.
-    *   An event listener was added to `contactFormBtn` to show `contactFormScreen` and hide `startScreen`, `questionScreen`, and `resultScreen`.
-    *   An event listener was added to `closeFormBtn` to hide `contactFormScreen` and show `startScreen`.
-    *   All original `getElementById` calls and event listeners for the MBTI test functionality were preserved and correctly placed to ensure full application functionality.
+1.  **Modify `index.html`:**
+    *   Added `style="display: none;"` to `<div id="start-screen">` to hide it initially.
+    *   Removed `style="display: none;"` from `<div id="contact-form-screen">` to make it visible by default.
+2.  **Modify `main.js`:**
+    *   Adjusted the `applyTheme()` function to explicitly set `startScreen.style.display = 'none';`, `questionScreen.style.display = 'none';`, `resultScreen.style.display = 'none';`, and `contactFormScreen.style.display = 'flex';` on page load. This ensures the contact form is the initial view.
+    *   Updated `startQuiz()` to ensure the `contactFormScreen` is hidden when the quiz starts.
+    *   Updated `showResult()` to ensure the `contactFormScreen` is hidden when quiz results are displayed.
+    *   Updated `retryQuiz()` to ensure the `contactFormScreen` is hidden when the quiz is retried and the `startScreen` is shown.
+    *   Updated `closeContactForm()` to ensure `contactFormScreen` is hidden and `startScreen` is shown, along with hiding other quiz screens.

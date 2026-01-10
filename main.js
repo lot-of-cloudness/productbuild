@@ -1,15 +1,20 @@
 const startScreen = document.getElementById('start-screen');
 const questionScreen = document.getElementById('question-screen');
 const resultScreen = document.getElementById('result-screen');
+const contactScreen = document.getElementById('contact-screen');
+
 const startBtn = document.getElementById('start-btn');
-const questionEl = document.getElementById('question');
 const answerA = document.getElementById('answer-a');
 const answerB = document.getElementById('answer-b');
+const retryBtn = document.getElementById('retry-btn');
+const themeToggle = document.getElementById('theme-toggle');
+const contactBtn = document.getElementById('contact-btn');
+const closeContactBtn = document.getElementById('close-contact-btn');
+
+const questionEl = document.getElementById('question');
 const progressBar = document.getElementById('progress');
 const mbtiResultEl = document.getElementById('mbti-result');
 const mbtiDescriptionEl = document.getElementById('mbti-description');
-const retryBtn = document.getElementById('retry-btn');
-const themeToggle = document.getElementById('theme-toggle');
 
 const questions = [
     { question: '사람들과 어울리는 것을 즐기시나요?', type: 'E', choiceA: '네', choiceB: '아니오' },
@@ -39,10 +44,21 @@ answerA.addEventListener('click', () => handleAnswer('A'));
 answerB.addEventListener('click', () => handleAnswer('B'));
 retryBtn.addEventListener('click', retryQuiz);
 themeToggle.addEventListener('click', toggleTheme);
+contactBtn.addEventListener('click', showContactScreen);
+closeContactBtn.addEventListener('click', hideContactScreen);
+
+function hideAllScreens() {
+    startScreen.style.display = 'none';
+    questionScreen.style.display = 'none';
+    resultScreen.style.display = 'none';
+    contactScreen.style.display = 'none';
+}
 
 function startQuiz() {
-    startScreen.style.display = 'none';
+    hideAllScreens();
     questionScreen.style.display = 'flex';
+    currentQuestionIndex = 0;
+    scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
     showQuestion();
 }
 
@@ -84,7 +100,7 @@ function updateProgressBar() {
 }
 
 function showResult() {
-    questionScreen.style.display = 'none';
+    hideAllScreens();
     resultScreen.style.display = 'flex';
     
     let mbti = '';
@@ -99,30 +115,16 @@ function showResult() {
 
 function getMbtiDescription(mbti) {
     const descriptions = {
-        'ISTJ': '청렴결백한 논리주의자',
-        'ISFJ': '용감한 수호자',
-        'INFJ': '선의의 옹호자',
-        'INTJ': '용의주도한 전략가',
-        'ISTP': '만능 재주꾼',
-        'ISFP': '호기심 많은 예술가',
-        'INFP': '열정적인 중재자',
-        'INTP': '논리적인 사색가',
-        'ESTP': '모험을 즐기는 사업가',
-        'ESFP': '자유로운 영혼의 연예인',
-        'ENFP': '재기발랄한 활동가',
-        'ENTP': '뜨거운 논쟁을 즐기는 변론가',
-        'ESTJ': '엄격한 관리자',
-        'ESFJ': '사교적인 외교관',
-        'ENFJ': '정의로운 사회운동가',
-        'ENTJ': '대담한 통솔자',
+        'ISTJ': '청렴결백한 논리주의자', 'ISFJ': '용감한 수호자', 'INFJ': '선의의 옹호자', 'INTJ': '용의주도한 전략가',
+        'ISTP': '만능 재주꾼', 'ISFP': '호기심 많은 예술가', 'INFP': '열정적인 중재자', 'INTP': '논리적인 사색가',
+        'ESTP': '모험을 즐기는 사업가', 'ESFP': '자유로운 영혼의 연예인', 'ENFP': '재기발랄한 활동가', 'ENTP': '뜨거운 논쟁을 즐기는 변론가',
+        'ESTJ': '엄격한 관리자', 'ESFJ': '사교적인 외교관', 'ENFJ': '정의로운 사회운동가', 'ENTJ': '대담한 통솔자',
     };
     return descriptions[mbti] || '결과를 찾을 수 없습니다.';
 }
 
 function retryQuiz() {
-    currentQuestionIndex = 0;
-    scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
-    resultScreen.style.display = 'none';
+    hideAllScreens();
     startScreen.style.display = 'flex';
 }
 
@@ -135,4 +137,14 @@ function toggleTheme() {
         document.documentElement.setAttribute('data-theme', 'dark');
         themeToggle.textContent = '☀️';
     }
+}
+
+function showContactScreen() {
+    hideAllScreens();
+    contactScreen.style.display = 'flex';
+}
+
+function hideContactScreen() {
+    hideAllScreens();
+    startScreen.style.display = 'flex';
 }
