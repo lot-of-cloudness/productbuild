@@ -9,10 +9,7 @@ const progressBar = document.getElementById('progress');
 const mbtiResultEl = document.getElementById('mbti-result');
 const mbtiDescriptionEl = document.getElementById('mbti-description');
 const retryBtn = document.getElementById('retry-btn');
-const themeToggleBtn = document.getElementById('theme-toggle');
-const contactFormScreen = document.getElementById('contact-form-screen');
-const contactFormBtn = document.getElementById('contact-form-btn');
-const closeFormBtn = document.getElementById('close-form-btn');
+const themeToggle = document.getElementById('theme-toggle');
 
 const questions = [
     { question: '사람들과 어울리는 것을 즐기시나요?', type: 'E', choiceA: '네', choiceB: '아니오' },
@@ -41,21 +38,7 @@ startBtn.addEventListener('click', startQuiz);
 answerA.addEventListener('click', () => handleAnswer('A'));
 answerB.addEventListener('click', () => handleAnswer('B'));
 retryBtn.addEventListener('click', retryQuiz);
-themeToggleBtn.addEventListener('click', toggleTheme);
-contactFormBtn.addEventListener('click', showContactForm);
-closeFormBtn.addEventListener('click', closeContactForm);
-
-function showContactForm() {
-    startScreen.style.display = 'none';
-    questionScreen.style.display = 'none';
-    resultScreen.style.display = 'none';
-    contactFormScreen.style.display = 'flex';
-}
-
-function closeContactForm() {
-    contactFormScreen.style.display = 'none';
-    startScreen.style.display = 'flex';
-}
+themeToggle.addEventListener('click', toggleTheme);
 
 function startQuiz() {
     startScreen.style.display = 'none';
@@ -145,16 +128,11 @@ function retryQuiz() {
 
 function toggleTheme() {
     const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    themeToggleBtn.textContent = newTheme === 'dark' ? '☀️' : '🌜';
+    if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        themeToggle.textContent = '🌙';
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeToggle.textContent = '☀️';
+    }
 }
-
-function applyTheme() {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    themeToggleBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌜';
-}
-
-applyTheme();
