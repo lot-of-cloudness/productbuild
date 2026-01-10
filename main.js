@@ -9,6 +9,7 @@ const progressBar = document.getElementById('progress');
 const mbtiResultEl = document.getElementById('mbti-result');
 const mbtiDescriptionEl = document.getElementById('mbti-description');
 const retryBtn = document.getElementById('retry-btn');
+const themeToggleBtn = document.getElementById('theme-toggle');
 
 const questions = [
     { question: '사람들과 어울리는 것을 즐기시나요?', type: 'E', choiceA: '네', choiceB: '아니오' },
@@ -37,6 +38,7 @@ startBtn.addEventListener('click', startQuiz);
 answerA.addEventListener('click', () => handleAnswer('A'));
 answerB.addEventListener('click', () => handleAnswer('B'));
 retryBtn.addEventListener('click', retryQuiz);
+themeToggleBtn.addEventListener('click', toggleTheme);
 
 function startQuiz() {
     startScreen.style.display = 'none';
@@ -123,3 +125,19 @@ function retryQuiz() {
     resultScreen.style.display = 'none';
     startScreen.style.display = 'flex';
 }
+
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    themeToggleBtn.textContent = newTheme === 'dark' ? '☀️' : '🌜';
+}
+
+function applyTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    themeToggleBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌜';
+}
+
+applyTheme();

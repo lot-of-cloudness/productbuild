@@ -1,22 +1,53 @@
+:root {
+    --bg-color: #f0f0f0;
+    --text-color: #333;
+    --container-bg-color: #fff;
+    --button-bg-color: #007bff;
+    --button-text-color: #fff;
+    --button-hover-bg-color: #0056b3;
+    --progress-bar-bg-color: #eee;
+    --progress-bar-fill-color: #007bff;
+}
+
+[data-theme="dark"] {
+    --bg-color: #333;
+    --text-color: #f0f0f0;
+    --container-bg-color: #444;
+    --button-bg-color: #00aaff;
+    --button-text-color: #fff;
+    --button-hover-bg-color: #0088cc;
+    --progress-bar-bg-color: #555;
+    --progress-bar-fill-color: #00aaff;
+}
+
 body {
     font-family: sans-serif;
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 100;
 }
 
 .container {
-    background-color: #fff;
+    background-color: var(--container-bg-color);
     padding: 2rem;
     border-radius: 1rem;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     text-align: center;
     max-width: 500px;
     width: 90%;
+    transition: background-color 0.3s ease;
 }
 
 .screen {
@@ -26,12 +57,12 @@ body {
 }
 
 h1, h2, h3 {
-    color: #333;
+    color: var(--text-color);
 }
 
 button {
-    background-color: #007bff;
-    color: #fff;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
     border: none;
     padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;
@@ -42,7 +73,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: var(--button-hover-bg-color);
 }
 
 .answer-btn {
@@ -52,7 +83,7 @@ button:hover {
 
 #progress-bar {
     width: 100%;
-    background-color: #eee;
+    background-color: var(--progress-bar-bg-color);
     border-radius: 0.5rem;
     margin-top: 1rem;
     height: 1rem;
@@ -60,7 +91,7 @@ button:hover {
 
 #progress {
     height: 100%;
-    background-color: #007bff;
+    background-color: var(--progress-bar-fill-color);
     border-radius: 0.5rem;
     width: 0%;
     transition: width 0.3s ease;
