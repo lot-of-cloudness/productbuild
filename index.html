@@ -1,14 +1,35 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBTI 테스트</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+    <div class="container">
+        <div id="start-screen" class="screen">
+            <h1>MBTI 테스트</h1>
+            <p>12가지 질문으로 당신의 MBTI를 알아보세요!</p>
+            <button id="start-btn">시작</button>
+        </div>
+        <div id="question-screen" class="screen" style="display: none;">
+            <div id="question-container">
+                <p id="question"></p>
+                <button class="answer-btn" id="answer-a"></button>
+                <button class="answer-btn" id="answer-b"></button>
+            </div>
+            <div id="progress-bar">
+                <div id="progress"></div>
+            </div>
+        </div>
+        <div id="result-screen" class="screen" style="display: none;">
+            <h2>당신의 MBTI는...</h2>
+            <h3 id="mbti-result"></h3>
+            <p id="mbti-description"></p>
+            <button id="retry-btn">다시하기</button>
+        </div>
+    </div>
+    <script src="main.js"></script>
 </body>
 </html>
