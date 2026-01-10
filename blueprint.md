@@ -1,33 +1,65 @@
-# MBTI診断サイトブループリント
+# Blueprint for MBTI Test Application
 
-## 概要
+## Overview
+This application is an interactive MBTI test, designed to determine a user's MBTI type through a series of 12 questions. It features a responsive design, theme toggling (light/dark mode), and a progress bar for the test. Additionally, a partnership inquiry form using Formspree has been integrated.
 
-このプロジェクトは、ユーザーが簡単なMBTI（Myers-Briggs Type Indicator）診断を手軽に体験できるウェブアプリケーションを構築することを目的としています。モダンなウェブ技術を活用し、洗練されたデザインと直感的なUI/UXを提供します。
+## Project Outline
 
-## 設計と機能
+### Initial Version (MBTI Test)
+*   **Application Type:** Web application (HTML, CSS, JavaScript)
+*   **Core Functionality:**
+    *   Start screen with a brief introduction.
+    *   Question screen displaying one question at a time with two answer choices.
+    *   Progress bar indicating test completion.
+    *   Result screen displaying the calculated MBTI type and a description.
+    *   Ability to retry the test.
+*   **Styling & Design:**
+    *   Modern, clean design with a focus on readability.
+    *   Themed (light/dark mode) using CSS variables.
+    *   Responsive layout for various screen sizes.
+*   **Technologies Used:**
+    *   HTML5
+    *   CSS3 (with CSS variables for theming)
+    *   JavaScript (ES Modules not explicitly used, but modern syntax)
 
-### **初期バージョン**
+### Current Version (with Formspree Contact Form)
+*   **New Feature:** Integrated a simple partnership inquiry contact form.
+*   **Form Details:**
+    *   Uses Formspree (`https://formspree.io/f/mlggrlaq`) for form submission.
+    *   Fields include "이름 (Name)", "이메일 (Email)", and "메시지 (Message)".
+    *   A button "제휴 문의" has been added to the `result-screen` to open the contact form.
+    *   The form is initially hidden (`display: none;`) and is toggled visible/hidden using JavaScript.
+    *   Includes a "닫기 (Close)" button (`close-form-btn`) to hide the form and return to the `start-screen`.
+*   **Styling:**
+    *   Form elements are styled to align with the existing theme, using CSS variables for colors and fonts.
+    *   Responsive design principles applied to the form.
+*   **Accessibility:** Basic accessibility considerations for form elements (labels, required attributes).
 
-*   **UI/UX デザイン:**
-    *   モダンでクリーンなデザインを採用。
-    *   美しいタイポグラフィとカラーパレットを使用。
-    *   モバイルレスポンシブ対応。
-*   **機能:**
-    *   12問の簡単な質問で構成されるMBTI診断。
-    *   各質問に2つの選択肢を提示。
-    *   診断結果を計算し、対応するMBTIタイプと簡単な説明を表示。
+## Plan for Current Request: Integrate Formspree Contact Form
 
-### **今後の拡張計画**
+### Objective
+To add a functional and visually integrated contact form for partnership inquiries using Formspree.
 
-*   **診断結果の共有機能:** SNSなどで診断結果を共有できる機能を追加。
-*   **多言語対応:** 韓国語以外の言語もサポート。
-*   **詳細な結果ページ:** 各MBTIタイプについてより詳しい解説を提供するページを追加。
-
-## **現在の実装計画**
-
-1.  **`index.html`の更新:**
-    *   診断サイトの基本的な構造（開始画面、質問画面、結果画面）を作成します。
-2.  **`style.css`の更新:**
-    *   モダンで洗練されたデザインを適用します。
-3.  **`main.js`の更新:**
-    *   MBTI診断のロジック（質問、回答処理、結果計算、結果表示）を実装します。
+### Steps Implemented
+1.  **Insert Form into `index.html`:**
+    *   A new `div` with `id="contact-form-screen"` and class `screen` was added below the main `div.container`.
+    *   This `div` contains an `<h2>` for "제휴 문의" and a `<form>` element.
+    *   The `<form>`'s `action` attribute is set to the provided Formspree endpoint (`https://formspree.io/f/mlggrlaq`).
+    *   Form fields include:
+        *   `label` and `input type="text"` for Name (`name="name"`).
+        *   `label` and `input type="email"` for Email (`name="_replyto"`).
+        *   `label` and `textarea` for Message (`name="message"`).
+    *   All input fields are marked `required`.
+    *   A `button type="submit"` is included for form submission.
+    *   A `button id="close-form-btn"` is added to close the form.
+    *   The `contact-form-screen` is initially hidden with `style="display: none;"`.
+    *   A new button, `contact-form-btn`, was added to the `result-screen` in `index.html` to serve as the entry point for the contact form.
+2.  **Add Styles to `style.css`:**
+    *   New CSS rules were added for `#contact-form-screen` to make it visually similar to the main `.container`.
+    *   Styles for `.form-group`, `label`, `input[type="text"]`, `input[type="email"]`, and `textarea` were added to ensure consistent styling and responsiveness.
+    *   Styles for the submit button and the close button were also added, leveraging existing theme variables where appropriate.
+3.  **Add JavaScript Logic to `main.js`:**
+    *   References to `contactFormScreen`, `contactFormBtn`, and `closeFormBtn` were added.
+    *   An event listener was added to `contactFormBtn` to show `contactFormScreen` and hide `startScreen`, `questionScreen`, and `resultScreen`.
+    *   An event listener was added to `closeFormBtn` to hide `contactFormScreen` and show `startScreen`.
+    *   All original `getElementById` calls and event listeners for the MBTI test functionality were preserved and correctly placed to ensure full application functionality.

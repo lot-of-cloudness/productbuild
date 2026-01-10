@@ -10,6 +10,9 @@ const mbtiResultEl = document.getElementById('mbti-result');
 const mbtiDescriptionEl = document.getElementById('mbti-description');
 const retryBtn = document.getElementById('retry-btn');
 const themeToggleBtn = document.getElementById('theme-toggle');
+const contactFormScreen = document.getElementById('contact-form-screen');
+const contactFormBtn = document.getElementById('contact-form-btn');
+const closeFormBtn = document.getElementById('close-form-btn');
 
 const questions = [
     { question: '사람들과 어울리는 것을 즐기시나요?', type: 'E', choiceA: '네', choiceB: '아니오' },
@@ -39,6 +42,20 @@ answerA.addEventListener('click', () => handleAnswer('A'));
 answerB.addEventListener('click', () => handleAnswer('B'));
 retryBtn.addEventListener('click', retryQuiz);
 themeToggleBtn.addEventListener('click', toggleTheme);
+contactFormBtn.addEventListener('click', showContactForm);
+closeFormBtn.addEventListener('click', closeContactForm);
+
+function showContactForm() {
+    startScreen.style.display = 'none';
+    questionScreen.style.display = 'none';
+    resultScreen.style.display = 'none';
+    contactFormScreen.style.display = 'flex';
+}
+
+function closeContactForm() {
+    contactFormScreen.style.display = 'none';
+    startScreen.style.display = 'flex';
+}
 
 function startQuiz() {
     startScreen.style.display = 'none';
