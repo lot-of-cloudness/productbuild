@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISTJ - 청렴결백한 논리주의자</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">홈</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="privacy-policy.html">개인정보처리방침</a></li>
+            </ul>
+        </nav>
+    </header>
+    <button id="theme-toggle">🌙</button>
+    <div class="container">
+        <h1>ISTJ: 청렴결백한 논리주의자</h1>
+        <p>현실적이고 책임감이 강하며, 사실에 근거하여 사고하고 행동하는 사람들입니다. 이들은 "세상의 소금형"으로 불리기도 합니다.</p>
+        
+        <h2>강점</h2>
+        <ul>
+            <li>책임감이 강하고, 맡은 일에 헌신적입니다.</li>
+            <li>정직하고, 약속을 잘 지킵니다.</li>
+            <li>현실적이고, 실용적인 해결책을 제시합니다.</li>
+            <li>조직력이 뛰어나고, 체계적으로 일을 처리합니다.</li>
+        </ul>
+
+        <h2>약점</h2>
+        <ul>
+            <li>변화에 대한 저항이 강하고, 융통성이 부족할 수 있습니다.</li>
+            <li>타인의 감정을 이해하고 공감하는 데 어려움을 느낄 수 있습니다.</li>
+            <li>지나치게 비판적이고, 세부 사항에 집착하는 경향이 있습니다.</li>
+            <li>새로운 아이디어나 추상적인 개념에 흥미를 느끼지 못할 수 있습니다.</li>
+        </ul>
+
+        <h2>추천 직업</h2>
+        <p>회계사, 판사, 공무원, 경찰관, 군인 등</p>
+
+        <h2>유명인 예시</h2>
+        <p>조지 워싱턴, 앤서니 홉킨스, 나탈리 포트만</p>
+    </div>
+    <footer>
+        <p>&copy; 2024 MBTI 테스트. All rights reserved.</p>
+    </footer>
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        });
+    </script>
+</body>
+</html>

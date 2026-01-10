@@ -1,52 +1,38 @@
-# Blueprint for MBTI Test Application
 
-## Overview
-This application is an interactive MBTI test, designed to determine a user's MBTI type through a series of 12 questions. It features a responsive design, theme toggling (light/dark mode), and a progress bar for the test. Additionally, a partnership inquiry form using Formspree has been integrated.
+# Blueprint: MBTI 테스트 웹 애플리케이션
 
-## Project Outline
+## 프로젝트 개요
 
-### Initial Version (MBTI Test)
-*   **Application Type:** Web application (HTML, CSS, JavaScript)
-*   **Core Functionality:**
-    *   Start screen with a brief introduction.
-    *   Question screen displaying one question at a time with two answer choices.
-    *   Progress bar indicating test completion.
-    *   Result screen displaying the calculated MBTI type and a description.
-    *   Ability to retry the test.
-*   **Styling & Design:**
-    *   Modern, clean design with a focus on readability.
-    *   Themed (light/dark mode) using CSS variables.
-    *   Responsive layout for various screen sizes.
-*   **Technologies Used:**
-    *   HTML5
-    *   CSS3 (with CSS variables for theming)
-    *   JavaScript (ES Modules not explicitly used, but modern syntax)
+이 프로젝트는 사용자가 간단한 12개의 질문을 통해 자신의 MBTI 성격 유형을 알아볼 수 있는 웹 애플리케이션입니다. 테스트 결과와 함께 각 MBTI 유형에 대한 설명을 제공하며, 16가지 성격 유형 각각에 대한 상세 페이지를 포함하고 있습니다. 또한, 다크 모드 기능을 지원하여 사용자 경험을 향상시키고, 제휴 문의 양식을 통해 비즈니스 기회를 창출할 수 있도록 설계되었습니다.
 
-### Current Version (with Formspree Contact Form)
-*   **New Feature:** Integrated a simple partnership inquiry contact form.
-*   **Form Details:**
-    *   Uses Formspree (`https://formspree.io/f/mlggrlaq`) for form submission.
-    *   Fields include "이름 (Name)", "이메일 (Email)", and "메시지 (Message)".
-    *   A button "제휴 문의" has been added to the `result-screen` to open the contact form.
-    *   The form is now visible by default on page load. The `start-screen` is initially hidden.
-    *   Includes a "닫기 (Close)" button (`close-form-btn`) to hide the form and return to the `start-screen`.
-*   **Styling:**
-    *   Form elements are styled to align with the existing theme, using CSS variables for colors and fonts.
-    *   Responsive design principles applied to the form.
-*   **Accessibility:** Basic accessibility considerations for form elements (labels, required attributes).
+## 구현된 기능
 
-## Plan for Current Request: Make Form Visible
+*   **MBTI 테스트 기능:** 12개의 질문으로 사용자의 MBTI 유형을 판별합니다.
+*   **결과 페이지:** 테스트 완료 후 사용자의 MBTI 유형과 간단한 설명을 보여줍니다.
+*   **16가지 성격 유형 상세 페이지:** 각 MBTI 유형(ISTJ, ISFJ, INFJ, INTJ, ISTP, ISFP, INFP, INTP, ESTP, ESFP, ENFP, ENTP, ESTJ, ESFJ, ENFJ, ENTJ)에 대한 상세 정보를 제공하는 별도의 HTML 페이지를 제공합니다.
+*   **새로운 디자인 및 다크 모드:** 통통 튀는 디자인과 다크 모드 기능을 모든 페이지에 적용하여 일관성 있는 사용자 경험을 제공합니다.
+*   **제휴 문의 양식:** 사용자가 제휴 관련 문의를 보낼 수 있는 양식을 제공합니다.
+*   **개인정보처리방침 및 About 페이지:** 웹사이트의 신뢰도를 높이기 위한 개인정보처리방침 및 About 페이지를 포함합니다.
+*   **반응형 웹 디자인:** 모바일 및 데스크톱 환경에서 최적화된 화면을 제공합니다.
 
-### Objective
-To modify the application so that the Formspree contact form is visible by default when the page loads, instead of the MBTI test start screen.
+## 현재 변경 사항 계획
 
-### Steps Implemented
-1.  **Modify `index.html`:**
-    *   Added `style="display: none;"` to `<div id="start-screen">` to hide it initially.
-    *   Removed `style="display: none;"` from `<div id="contact-form-screen">` to make it visible by default.
-2.  **Modify `main.js`:**
-    *   Adjusted the `applyTheme()` function to explicitly set `startScreen.style.display = 'none';`, `questionScreen.style.display = 'none';`, `resultScreen.style.display = 'none';`, and `contactFormScreen.style.display = 'flex';` on page load. This ensures the contact form is the initial view.
-    *   Updated `startQuiz()` to ensure the `contactFormScreen` is hidden when the quiz starts.
-    *   Updated `showResult()` to ensure the `contactFormScreen` is hidden when quiz results are displayed.
-    *   Updated `retryQuiz()` to ensure the `contactFormScreen` is hidden when the quiz is retried and the `startScreen` is shown.
-    *   Updated `closeContactForm()` to ensure `contactFormScreen` is hidden and `startScreen` is shown, along with hiding other quiz screens.
+**요청:** 테스트 결과에 ‘자세히 알아보기’ 버튼이 각 페이지에 연결되지 않아, 해당 버튼을 제거해달라는 요청이 있었습니다.
+
+**계획:**
+
+1.  **`index.html` 파일 수정:**
+    *   `result-screen` 섹션에서 ‘자세히 알아보기’ 버튼의 HTML 코드 (`<a href="#" id="result-details-link" target="_blank"><button>자세히 알아보기</button></a>`)를 삭제했습니다.
+2.  **`main.js` 파일 수정:**
+    *   `resultDetailsLink` 변수 선언 및 관련 코드 라인을 삭제하여 불필요한 자바스크립트 로직을 제거했습니다.
+    *   `showResult` 함수에서 `resultDetailsLink.href`를 설정하는 코드를 삭제했습니다.
+
+**실행:**
+
+*   `index.html` 파일에서 ‘자세히 알아보기’ 버튼을 제거했습니다.
+*   `main.js` 파일에서 관련 자바스크립트 코드를 삭제하여 기능을 완전히 제거하고 코드를 정리했습니다.
+
+**결과:**
+
+*   이제 테스트 결과 페이지에 ‘자세히 알아보기’ 버튼이 더 이상 표시되지 않습니다.
+*   사용자는 혼란 없이 ‘다시 테스트하기’ 버튼을 통해 테스트를 다시 시작하거나, 하단의 유형별 카드를 통해 직접 상세 페이지로 이동할 수 있습니다.

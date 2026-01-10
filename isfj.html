@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISFJ - 용감한 수호자</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">홈</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="privacy-policy.html">개인정보처리방침</a></li>
+            </ul>
+        </nav>
+    </header>
+    <button id="theme-toggle">🌙</button>
+    <div class="container">
+        <h1>ISFJ: 용감한 수호자</h1>
+        <p>조용하고 차분하며, 다른 사람들을 돕는 데서 큰 보람을 느끼는 헌신적인 사람들입니다. 이들은 "임금 뒷편의 권력형"으로도 불립니다.</p>
+        
+        <h2>강점</h2>
+        <ul>
+            <li>책임감이 강하고, 성실하며, 인내심이 많습니다.</li>
+            <li>동정심이 많고, 다른 사람의 감정을 잘 이해합니다.</li>
+            <li>뛰어난 기억력을 가지고 있으며, 세부 사항을 잘 기억합니다.</li>
+            <li>안정적이고, 조화로운 관계를 중요하게 생각합니다.</li>
+        </ul>
+
+        <h2>약점</h2>
+        <ul>
+            <li>변화에 대한 두려움이 있고, 새로운 환경에 적응하는 데 시간이 걸립니다.</li>
+            <li>자신의 의견을 표현하는 데 어려움을 느끼고, 갈등을 회피하려는 경향이 있습니다.</li>
+            <li>타인의 비판에 민감하게 반응하고, 상처를 쉽게 받습니다.</li>
+            <li>자신의 필요를 등한시하고, 다른 사람들을 우선시하는 경향이 있습니다.</li>
+        </ul>
+
+        <h2>추천 직업</h2>
+        <p>간호사, 교사, 사회복지사, 사서, 행정가 등</p>
+
+        <h2>유명인 예시</h2>
+        <p>마더 테레사, 비욘세, 앤 해서웨이</p>
+    </div>
+    <footer>
+        <p>&copy; 2024 MBTI 테스트. All rights reserved.</p>
+    </footer>
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        });
+    </script>
+</body>
+</html>

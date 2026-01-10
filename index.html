@@ -3,20 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBTI 테스트</title>
+    <title>MBTI 테스트 - 당신의 성격을 알아보세요!</title>
     <link rel="stylesheet" href="style.css">
     <meta name="google-adsense-account" content="ca-pub-7918412114576418">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7918412114576418"
      crossorigin="anonymous"></script>
 </head>
 <body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">홈</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="privacy-policy.html">개인정보처리방침</a></li>
+            </ul>
+        </nav>
+    </header>
     <button id="theme-toggle">🌙</button>
     <div class="container">
         <div id="start-screen" class="screen">
-            <h1>MBTI 테스트</h1>
-            <p>12가지 질문으로 당신의 MBTI를 알아보세요!</p>
-            <button id="start-btn">시작</button>
+            <h1>MBTI 성격 테스트</h1>
+            <p>간단한 12개의 질문으로 당신의 진짜 성격 유형을 발견해보세요!</p>
+            <button id="start-btn">테스트 시작! 🎉</button>
         </div>
+
         <div id="question-screen" class="screen" style="display: none;">
             <div id="question-container">
                 <p id="question"></p>
@@ -27,25 +37,52 @@
                 <div id="progress"></div>
             </div>
         </div>
+
         <div id="result-screen" class="screen" style="display: none;">
-            <h2>당신의 MBTI는...</h2>
+            <h2>당신의 MBTI 결과는...</h2>
             <h3 id="mbti-result"></h3>
             <p id="mbti-description"></p>
-            <button id="retry-btn">다시하기</button>
+            <button id="retry-btn">다시 테스트하기</button>
         </div>
+
+        <div id="mbti-types-screen" class="screen">
+            <h2>16가지 성격 유형 탐색하기</h2>
+            <div class="mbti-grid">
+                <a href="istj.html" class="mbti-card"><h4>ISTJ</h4></a>
+                <a href="isfj.html" class="mbti-card"><h4>ISFJ</h4></a>
+                <a href="infj.html" class="mbti-card"><h4>INFJ</h4></a>
+                <a href="intj.html" class="mbti-card"><h4>INTJ</h4></a>
+                <a href="istp.html" class="mbti-card"><h4>ISTP</h4></a>
+                <a href="isfp.html" class="mbti-card"><h4>ISFP</h4></a>
+                <a href="infp.html" class="mbti-card"><h4>INFP</h4></a>
+                <a href="intp.html" class="mbti-card"><h4>INTP</h4></a>
+                <a href="estp.html" class="mbti-card"><h4>ESTP</h4></a>
+                <a href="esfp.html" class="mbti-card"><h4>ESFP</h4></a>
+                <a href="enfp.html" class="mbti-card"><h4>ENFP</h4></a>
+                <a href="entp.html" class="mbti-card"><h4>ENTP</h4></a>
+                <a href="estj.html" class="mbti-card"><h4>ESTJ</h4></a>
+                <a href="esfj.html" class="mbti-card"><h4>ESFJ</h4></a>
+                <a href="enfj.html" class="mbti-card"><h4>ENFJ</h4></a>
+                <a href="entj.html" class="mbti-card"><h4>ENTJ</h4></a>
+            </div>
+        </div>
+
         <div id="contact-screen" class="screen" style="display: none;">
             <h2>제휴 문의</h2>
-            <p>아래 양식을 통해 문의주시면 연락드리겠습니다.</p>
-            <form id="contact-form" action="https://formspree.io/f/your_form_id" method="POST">
-                <input type="text" name="name" placeholder="이름" required>
-                <input type="email" name="email" placeholder="이메일" required>
-                <textarea name="message" placeholder="내용" required></textarea>
-                <button type="submit">보내기</button>
+            <p>아래 양식을 통해 문의주시면 신속하게 답변드리겠습니다.</p>
+            <form id="contact-form">
+                <input type="text" name="name" placeholder="성함" required>
+                <input type="email" name="email" placeholder="이메일 주소" required>
+                <textarea name="message" placeholder="문의하실 내용을 입력해주세요." required></textarea>
+                <button type="submit">메시지 보내기</button>
             </form>
             <button id="close-contact-btn">닫기</button>
         </div>
     </div>
-    <button id="contact-btn">제휴 문의</button>
+    <button id="contact-btn">✉️ 제휴 문의</button>
+    <footer>
+        <p>&copy; 2024 MBTI 테스트. All rights reserved.</p>
+    </footer>
     <script src="main.js"></script>
 </body>
 </html>

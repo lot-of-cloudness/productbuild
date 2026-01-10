@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INTJ - 용의주도한 전략가</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">홈</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="privacy-policy.html">개인정보처리방침</a></li>
+            </ul>
+        </nav>
+    </header>
+    <button id="theme-toggle">🌙</button>
+    <div class="container">
+        <h1>INTJ: 용의주도한 전략가</h1>
+        <p>독창적이고, 논리적이며, 뛰어난 전략적 사고를 하는 사람들입니다. 이들은 "과학자형"으로 불리기도 합니다.</p>
+        
+        <h2>강점</h2>
+        <ul>
+            <li>뛰어난 분석력과 논리적 사고 능력을 가지고 있습니다.</li>
+            <li>독창적이고, 복잡한 문제를 해결하는 것을 즐깁니다.</li>
+            <li>자신감이 넘치고, 독립적이며, 자기 주도적입니다.</li>
+            <li>미래를 예측하고, 장기적인 계획을 세우는 데 능숙합니다.</li>
+        </ul>
+
+        <h2>약점</h2>
+        <ul>
+            <li>타인의 감정을 이해하고 공감하는 데 어려움을 느낄 수 있습니다.</li>
+            <li>지나치게 비판적이고, 오만해 보일 수 있습니다.</li>
+            <li>자신의 능력에 대한 과신으로, 다른 사람의 의견을 무시하는 경향이 있습니다.</li>
+            <li>사회적인 관계나 사교 활동에 큰 흥미를 느끼지 못할 수 있습니다.</li>
+        </ul>
+
+        <h2>추천 직업</h2>
+        <p>과학자, 엔지니어, 변호사, 경영 컨설턴트, 프로그래머 등</p>
+
+        <h2>유명인 예시</h2>
+        <p>아이작 뉴턴, 스티븐 호킹, 일론 머스크</p>
+    </div>
+    <footer>
+        <p>&copy; 2024 MBTI 테스트. All rights reserved.</p>
+    </footer>
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        });
+    </script>
+</body>
+</html>

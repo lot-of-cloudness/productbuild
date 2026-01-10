@@ -1,150 +1,132 @@
-const startScreen = document.getElementById('start-screen');
-const questionScreen = document.getElementById('question-screen');
-const resultScreen = document.getElementById('result-screen');
-const contactScreen = document.getElementById('contact-screen');
+document.addEventListener('DOMContentLoaded', () => {
+    const startBtn = document.getElementById('start-btn');
+    const startScreen = document.getElementById('start-screen');
+    const questionScreen = document.getElementById('question-screen');
+    const resultScreen = document.getElementById('result-screen');
+    const retryBtn = document.getElementById('retry-btn');
 
-const startBtn = document.getElementById('start-btn');
-const answerA = document.getElementById('answer-a');
-const answerB = document.getElementById('answer-b');
-const retryBtn = document.getElementById('retry-btn');
-const themeToggle = document.getElementById('theme-toggle');
-const contactBtn = document.getElementById('contact-btn');
-const closeContactBtn = document.getElementById('close-contact-btn');
+    const questionEl = document.getElementById('question');
+    const answerABtn = document.getElementById('answer-a');
+    const answerBBtn = document.getElementById('answer-b');
+    const progressEl = document.getElementById('progress');
 
-const questionEl = document.getElementById('question');
-const progressBar = document.getElementById('progress');
-const mbtiResultEl = document.getElementById('mbti-result');
-const mbtiDescriptionEl = document.getElementById('mbti-description');
+    const mbtiResultEl = document.getElementById('mbti-result');
+    const mbtiDescriptionEl = document.getElementById('mbti-description');
 
-const questions = [
-    { question: '사람들과 어울리는 것을 즐기시나요?', type: 'E', choiceA: '네', choiceB: '아니오' },
-    { question: '현실적인 것에 더 집중하는 편인가요?', type: 'S', choiceA: '네', choiceB: '아니오' },
-    { question: '결정을 내릴 때 논리와 사실을 중요하게 생각하시나요?', type: 'T', choiceA: '네', choiceB: '아니오' },
-    { question: '계획을 세우고 체계적으로 일하는 것을 선호하시나요?', type: 'J', choiceA: '네', choiceB: '아니오' },
-    { question: '파티나 모임에서 중심에 있는 것을 즐기시나요?', type: 'E', choiceA: '네', choiceB: '아니오' },
-    { question: '실제 경험을 통해 배우는 것을 선호하시나요?', type: 'S', choiceA: '네', choiceB: '아니오' },
-    { question: '객관적인 사실에 근거하여 비판하는 편인가요?', type: 'T', choiceA: '네', choiceB: '아니오' },
-    { question: '마감 기한을 지키기 위해 미리 계획을 세우시나요?', type: 'J', choiceA: '네', choiceB: '아니오' },
-    { question: '새로운 사람들을 만나는 것을 좋아하시나요?', type: 'E', choiceA: '네', choiceB: '아니오' },
-    { question: '구체적인 정보를 더 신뢰하시나요?', type: 'S', choiceA: '네', choiceB: '아니오' },
-    { question: '감정적인 호소보다는 논리적인 설명에 더 설득되시나요?', type: 'T', choiceA: '네', choiceB: '아니오' },
-    { question: '주변 환경을 정리정돈하는 것을 좋아하시나요?', type: 'J', choiceA: '네', choiceB: '아니오' },
-];
+    const themeToggle = document.getElementById('theme-toggle');
+    const contactBtn = document.getElementById('contact-btn');
+    const contactScreen = document.getElementById('contact-screen');
+    const closeContactBtn = document.getElementById('close-contact-btn');
+    const mbtiTypesScreen = document.getElementById('mbti-types-screen');
 
-let currentQuestionIndex = 0;
-let scores = {
-    E: 0, I: 0,
-    S: 0, N: 0,
-    T: 0, F: 0,
-    J: 0, P: 0
-};
+    const questions = [
+        { question: '혼자 있을 때 에너지를 얻나요, 아니면 다른 사람들과 함께 있을 때 에너지를 얻나요?', a: '혼자 있을 때', b: '다른 사람들과 함께 있을 때', type: 'I', type_b: 'E' },
+        { question: '미래의 가능성을 상상하는 것을 즐기나요, 아니면 현재의 사실에 집중하는 것을 선호하나요?', a: '가능성을 상상', b: '현재 사실에 집중', type: 'N', type_b: 'S' },
+        { question: '결정을 내릴 때 논리와 원칙을 중요하게 생각하나요, 아니면 사람들의 감정을 더 중요하게 생각하나요?', a: '논리와 원칙', b: '사람들의 감정', type: 'T', type_b: 'F' },
+        { question: '계획을 세우고 미리 준비하는 것을 선호하나요, 아니면 즉흥적으로 행동하는 것을 즐기나요?', a: '계획과 준비', b: '즉흥적 행동', type: 'J', type_b: 'P' },
+        { question: '주목받는 것을 즐기나요, 아니면 주목받지 않는 것을 선호하나요?', a: '주목받지 않음', b: '주목받는 것', type: 'I', type_b: 'E' },
+        { question: '경험에서 배우는 것을 중요하게 생각하나요, 아니면 이론과 개념을 통해 배우는 것을 선호하나요?', a: '이론과 개념', b: '경험에서 배움', type: 'N', type_b: 'S' },
+        { question: '다른 사람의 의견에 동의하지 않을 때, 솔직하게 표현하는 편인가요?', a: '솔직하게 표현', b: '상황에 따라 다름', type: 'T', type_b: 'F' },
+        { question: '마감일이 다가올수록 더 힘이 나나요, 아니면 미리 일을 끝내고 여유를 즐기나요?', a: '미리 끝내고 여유', b: '마감일에 힘이 남', type: 'J', type_b: 'P' },
+        { question: '새로운 사람들을 만나는 것을 즐기나요, 아니면 기존에 알던 사람들과 어울리는 것을 선호하나요?', a: '기존에 알던 사람', b: '새로운 사람', type: 'I', type_b: 'E' },
+        { question: '나무보다는 숲을 보는 경향이 있나요?', a: '네', b: '아니오', type: 'N', type_b: 'S' },
+        { question: '객관적인 사실과 논리가 감정보다 중요하다고 생각하나요?', a: '네', b: '아니오', type: 'T', type_b: 'F' },
+        { question: '여행을 갈 때, 상세한 계획을 세우는 편인가요, 아니면 대략적인 계획만 세우나요?', a: '상세한 계획', b: '대략적인 계획', type: 'J', type_b: 'P' },
+    ];
 
-startBtn.addEventListener('click', startQuiz);
-answerA.addEventListener('click', () => handleAnswer('A'));
-answerB.addEventListener('click', () => handleAnswer('B'));
-retryBtn.addEventListener('click', retryQuiz);
-themeToggle.addEventListener('click', toggleTheme);
-contactBtn.addEventListener('click', showContactScreen);
-closeContactBtn.addEventListener('click', hideContactScreen);
+    const mbtiDescriptions = {
+        ISTJ: "청렴결백한 논리주의자, 세상의 소금형",
+        ISFJ: "용감한 수호자, 임금 뒷편의 권력형",
+        INFJ: "선의의 옹호자, 예언자형",
+        INTJ: "용의주도한 전략가, 과학자형",
+        ISTP: "만능 재주꾼, 백과사전형",
+        ISFP: "호기심 많은 예술가, 성인군자형",
+        INFP: "열정적인 중재자, 잔다르크형",
+        INTP: "논리적인 사색가, 아이디어 뱅크형",
+        ESTP: "모험을 즐기는 사업가, 수완좋은 활동가형",
+        ESFP: "자유로운 영혼의 연예인, 사교적인 유형",
+        ENFP: "재기발랄한 활동가, 스파크형",
+        ENTP: "뜨거운 논쟁을 즐기는 변론가, 발명가형",
+        ESTJ: "엄격한 관리자, 사업가형",
+        ESFJ: "사교적인 외교관, 친선도모형",
+        ENFJ: "정의로운 사회운동가, 언변능숙형",
+        ENTJ: "대담한 통솔자, 지도자형"
+    };
 
-function hideAllScreens() {
-    startScreen.style.display = 'none';
-    questionScreen.style.display = 'none';
-    resultScreen.style.display = 'none';
-    contactScreen.style.display = 'none';
-}
+    let currentQuestionIndex = 0;
+    let userAnswers = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, P: 0, J: 0 };
 
-function startQuiz() {
-    hideAllScreens();
-    questionScreen.style.display = 'flex';
-    currentQuestionIndex = 0;
-    scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
-    showQuestion();
-}
+    function startTest() {
+        startScreen.style.display = 'none';
+        mbtiTypesScreen.style.display = 'none';
+        questionScreen.style.display = 'block';
+        currentQuestionIndex = 0;
+        userAnswers = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, P: 0, J: 0 };
+        showQuestion();
+    }
 
-function showQuestion() {
-    const currentQuestion = questions[currentQuestionIndex];
-    questionEl.textContent = currentQuestion.question;
-    answerA.textContent = currentQuestion.choiceA;
-    answerB.textContent = currentQuestion.choiceB;
-    updateProgressBar();
-}
+    function showQuestion() {
+        const currentQuestion = questions[currentQuestionIndex];
+        questionEl.textContent = currentQuestion.question;
+        answerABtn.textContent = currentQuestion.a;
+        answerBBtn.textContent = currentQuestion.b;
+        updateProgress();
+    }
 
-function handleAnswer(choice) {
-    const currentQuestion = questions[currentQuestionIndex];
-    const type = currentQuestion.type;
+    function handleAnswer(answer) {
+        const currentQuestion = questions[currentQuestionIndex];
+        userAnswers[answer === 'a' ? currentQuestion.type : currentQuestion.type_b]++;
+        currentQuestionIndex++;
 
-    if (choice === 'A') {
-        scores[type]++;
-    } else {
-        switch(type) {
-            case 'E': scores['I']++; break;
-            case 'S': scores['N']++; break;
-            case 'T': scores['F']++; break;
-            case 'J': scores['P']++; break;
+        if (currentQuestionIndex < questions.length) {
+            showQuestion();
+        } else {
+            showResult();
         }
     }
 
-    currentQuestionIndex++;
-
-    if (currentQuestionIndex < questions.length) {
-        showQuestion();
-    } else {
-        showResult();
+    function updateProgress() {
+        const progressPercentage = (currentQuestionIndex / questions.length) * 100;
+        progressEl.style.width = `${progressPercentage}%`;
     }
-}
 
-function updateProgressBar() {
-    const progressPercentage = (currentQuestionIndex / questions.length) * 100;
-    progressBar.style.width = `${progressPercentage}%`;
-}
+    function showResult() {
+        questionScreen.style.display = 'none';
+        resultScreen.style.display = 'block';
+        
+        let result = '';
+        result += userAnswers.I > userAnswers.E ? 'I' : 'E';
+        result += userAnswers.N > userAnswers.S ? 'N' : 'S';
+        result += userAnswers.F > userAnswers.T ? 'F' : 'T';
+        result += userAnswers.P > userAnswers.J ? 'P' : 'J';
 
-function showResult() {
-    hideAllScreens();
-    resultScreen.style.display = 'flex';
-    
-    let mbti = '';
-    mbti += scores.E >= 2 ? 'E' : 'I';
-    mbti += scores.S >= 2 ? 'S' : 'N';
-    mbti += scores.T >= 2 ? 'T' : 'F';
-    mbti += scores.J >= 2 ? 'J' : 'P';
-
-    mbtiResultEl.textContent = mbti;
-    mbtiDescriptionEl.textContent = getMbtiDescription(mbti);
-}
-
-function getMbtiDescription(mbti) {
-    const descriptions = {
-        'ISTJ': '청렴결백한 논리주의자', 'ISFJ': '용감한 수호자', 'INFJ': '선의의 옹호자', 'INTJ': '용의주도한 전략가',
-        'ISTP': '만능 재주꾼', 'ISFP': '호기심 많은 예술가', 'INFP': '열정적인 중재자', 'INTP': '논리적인 사색가',
-        'ESTP': '모험을 즐기는 사업가', 'ESFP': '자유로운 영혼의 연예인', 'ENFP': '재기발랄한 활동가', 'ENTP': '뜨거운 논쟁을 즐기는 변론가',
-        'ESTJ': '엄격한 관리자', 'ESFJ': '사교적인 외교관', 'ENFJ': '정의로운 사회운동가', 'ENTJ': '대담한 통솔자',
-    };
-    return descriptions[mbti] || '결과를 찾을 수 없습니다.';
-}
-
-function retryQuiz() {
-    hideAllScreens();
-    startScreen.style.display = 'flex';
-}
-
-function toggleTheme() {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    if (currentTheme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'light');
-        themeToggle.textContent = '🌙';
-    } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        themeToggle.textContent = '☀️';
+        mbtiResultEl.textContent = result;
+        mbtiDescriptionEl.textContent = mbtiDescriptions[result];
     }
-}
 
-function showContactScreen() {
-    hideAllScreens();
-    contactScreen.style.display = 'flex';
-}
+    function retryTest() {
+        resultScreen.style.display = 'none';
+        startScreen.style.display = 'block';
+        mbtiTypesScreen.style.display = 'block';
+    }
 
-function hideContactScreen() {
-    hideAllScreens();
-    startScreen.style.display = 'flex';
-}
+    // Theme toggle
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+    });
+
+    // Contact form modal
+    contactBtn.addEventListener('click', () => {
+        contactScreen.style.display = 'block';
+    });
+
+    closeContactBtn.addEventListener('click', () => {
+        contactScreen.style.display = 'none';
+    });
+
+    startBtn.addEventListener('click', startTest);
+    answerABtn.addEventListener('click', () => handleAnswer('a'));
+    answerBBtn.addEventListener('click', () => handleAnswer('b'));
+    retryBtn.addEventListener('click', retryTest);
+});
