@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBTI 테스트</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q08B22CYTY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Q08B22CYTY');
+</script>
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "v2pyzc7e6g");
+</script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">홈</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="privacy-policy.html">개인정보처리방침</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>MBTI 테스트</h1>
+        <form id="mbti-form">
+            <div class="question">
+                <p>1. 새로운 사람들을 만나는 것을 즐기시나요?</p>
+                <label><input type="radio" name="q1" value="E" required> 예</label>
+                <label><input type="radio" name="q1" value="I"> 아니오</label>
+            </div>
+            <div class="question">
+                <p>2. 사실과 현실에 더 집중하는 편이신가요?</p>
+                <label><input type="radio" name="q2" value="S" required> 예</label>
+                <label><input type="radio" name="q2" value="N"> 아니오</label>
+            </div>
+            <div class="question">
+                <p>3. 결정을 내릴 때 논리와 분석을 중시하시나요?</p>
+                <label><input type="radio" name="q3" value="T" required> 예</label>
+                <label><input type="radio" name="q3" value="F"> 아니오</label>
+            </div>
+            <div class="question">
+                <p>4. 계획을 세우고 따르는 것을 선호하시나요?</p>
+                <label><input type="radio" name="q4" value="J" required> 예</label>
+                <label><input type="radio" name="q4" value="P"> 아니오</label>
+            </div>
+             <div class="question">
+                <p>5. 주말에 주로 친구들과 시간을 보내시나요, 아니면 혼자 조용히 보내시나요?</p>
+                <label><input type="radio" name="q5" value="E" required> 친구들과 함께</label>
+                <label><input type="radio" name="q5" value="I"> 혼자 조용히</label>
+            </div>
+            <div class="question">
+                <p>6. 새로운 아이디어나 가능성에 더 흥미를 느끼시나요?</p>
+                <label><input type="radio" name="q6" value="N" required> 예</label>
+                <label><input type="radio" name="q6" value="S"> 아니오</label>
+            </div>
+            <div class="question">
+                <p>7. 타인의 감정을 고려하여 결정을 내리는 편이신가요?</p>
+                <label><input type="radio" name="q7" value="F" required> 예</label>
+                <label><input type="radio" name="q7" value="T"> 아니오</label>
+            </div>
+            <div class="question">
+                <p>8. 즉흥적인 여행이나 계획을 즐기시나요?</p>
+                <label><input type="radio" name="q8" value="P" required> 예</label>
+                <label><input type="radio" name="q8" value="J"> 아니오</label>
+            </div>
+            <button type="submit" class="btn">결과 보기</button>
+        </form>
+    </div>
+    <footer>
+        <p>&copy; 2024 MBTI 테스트. All rights reserved.</p>
+    </footer>
+    <script>
+        const form = document.getElementById('mbti-form');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            let scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+
+            for (let [key, value] of formData.entries()) {
+                scores[value]++;
+            }
+
+            let mbti = '';
+            mbti += scores.E > scores.I ? 'E' : 'I';
+            mbti += scores.S > scores.N ? 'S' : 'N';
+            mbti += scores.T > scores.F ? 'T' : 'F';
+            mbti += scores.J > scores.P ? 'J' : 'P';
+
+            window.location.href = `result.html?mbti=${mbti.toLowerCase()}`;
+        });
+    </script>
+</body>
+</html>
